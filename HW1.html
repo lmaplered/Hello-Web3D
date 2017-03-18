@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<style>
+
+
+</style>
+</head>
+
+<body> 
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<div id='light0' style='float:left; width:25%'>light 0</div>
+<div>
+<button id='t01'>ON</button>
+<button id='t02'>Off</button>
+</div>
+
+<div id='light1' style='float:left; width:25%'>light 1</div>
+<div>
+<button id='t11'>ON</button>
+<button id='t12'>Off</button>
+</div>
+<script>
+//constructor
+function Light(L) {
+  var num = '#' + L;
+  var status = false;
+
+  var toggle = function() {
+    status = !status;
+    if (status) {
+      $(num).css('backgroundColor', 'hsl(0, 100%, 50%)');
+      $(num).text(num + ' is on');
+    } else {
+      $(num).css('backgroundColor', 'hsl(0, 60%, 50%)');
+      $(num).text(num + ' is off');
+    }
+  }
+  var onoff = 0;
+  this.Blink = function(onoff) {
+    if (onoff) {
+      x = setInterval(function() {
+        toggle(), 1000
+      });
+    }
+  }
+  this.On = function() {
+    this.Blink(1);
+  }
+  var x;
+  this.Off = function() {
+    clearInterval(x);
+  }
+}
+// an instance of Light, l0
+var l0 = new Light('light0');
+//l0.Blink(1);
+var l1 = new Light('light1');
+
+
+// callback function of he button 'toggle'
+$('#t01').click(function() {
+  l0.On();
+});
+$('#t02').click(function() {
+  l0.Off();
+});
+$('#t11').click(function() {
+  l1.On();
+});
+$('#t12').click(function() {
+  l1.Off();
+});
+
+
+
+</script>
+</body>
+
+</html>
