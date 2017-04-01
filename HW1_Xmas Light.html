@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<style>
+
+
+</style>
+</head>
+
+<body>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<h2 align='center'>HW1<div></div>Xmas Light (<a href="https://jsfiddle.net/maplered/L9dadsp1/110/">jsfiddle</a>)</h2>
+
+<div id='light0' style='width:25%; margin:0 auto;'>light0</div>
+<div id='light1' style='float:left; width:25%; margin:100px auto auto 0;'>light1</div>
+<div style='margin:100px auto auto 200px;'><button id='b'>ON/OFF</button></div>
+<div id='light2' style='width:25%; margin:100px auto 0 auto;'>light2</div>
+
+<script>
+//constructor
+function Light(L) {
+  var num = '#' + L;
+  var status = false;
+
+  var hue;
+  var toggle = function() {
+    status = !status;
+    hue = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+    if (status) {
+      $(num).css('backgroundColor', hue);
+      //$(num).text(num + ' is on');
+    } else {
+      $(num).css('backgroundColor', hue);
+      //$(num).text(num + ' is off');
+    }
+  }
+  var x;
+  var onoff = false;
+  this.blink = function() {
+    onoff = !onoff;
+    if (onoff) x = setInterval(toggle, 500);
+    else clearInterval(x);
+  }
+}
+// an instance of Light
+var l = [];
+for (var i = 0; i < 3; i++) l[i] = new Light('light' + i);
+
+// callback function of he button 'toggle'
+$('#b').click(function() {
+  for (var i = 0; i < 3; i++) l[i].blink();
+});
+
+
+</script>
+</body>
+
+</html>
